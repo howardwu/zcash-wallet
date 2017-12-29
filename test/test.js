@@ -1,5 +1,5 @@
 const test = require('tape')
-const zaddr = require('../index')
+const zcash = require('../index')
 
 // Generated using zcashd v1.0.14-RC1.
 const mainnetPairs = [
@@ -24,42 +24,42 @@ const mainnetPairs = [
 ]
 
 test('generateSpendingKey', function (t) {
-  const mainnetSpendingKey = zaddr.generateSpendingKey('mainnet')
+  const mainnetSpendingKey = zcash.generateSpendingKey('mainnet')
   t.equal(mainnetSpendingKey.slice(0, 2), 'SK')
 
-  const testnetSpendingKey = zaddr.generateSpendingKey('testnet')
+  const testnetSpendingKey = zcash.generateSpendingKey('testnet')
   t.equal(testnetSpendingKey.slice(0, 2), 'ST')
   t.end()
 })
 
 test('generateViewingKeyFromSpendingKey', function (t) {
-  const mainnetSpendingKey = zaddr.generateSpendingKey('mainnet')
-  const mainnetViewingKey = zaddr.generateViewingKeyFromSpendingKey(mainnetSpendingKey, 'mainnet')
+  const mainnetSpendingKey = zcash.generateSpendingKey('mainnet')
+  const mainnetViewingKey = zcash.generateViewingKeyFromSpendingKey(mainnetSpendingKey, 'mainnet')
   t.equal(mainnetViewingKey.slice(0, 4), 'ZiVK')
 
-  const testnetSpendingKey = zaddr.generateSpendingKey('testnet')
-  const testnetViewingKey = zaddr.generateViewingKeyFromSpendingKey(testnetSpendingKey, 'testnet')
+  const testnetSpendingKey = zcash.generateSpendingKey('testnet')
+  const testnetViewingKey = zcash.generateViewingKeyFromSpendingKey(testnetSpendingKey, 'testnet')
   t.equal(testnetViewingKey.slice(0, 4), 'ZiVt')
   t.end()
 })
 
 test('generateAddressFromSpendingKey', function (t) {
-  const mainnetSpendingKey = zaddr.generateSpendingKey('mainnet')
-  const mainnetAddress = zaddr.generateAddressFromSpendingKey(mainnetSpendingKey, 'mainnet')
+  const mainnetSpendingKey = zcash.generateSpendingKey('mainnet')
+  const mainnetAddress = zcash.generateAddressFromSpendingKey(mainnetSpendingKey, 'mainnet')
   t.equal(mainnetAddress.slice(0, 2), 'zc')
 
-  const testnetSpendingKey = zaddr.generateSpendingKey('testnet')
-  const testnetAddress = zaddr.generateAddressFromSpendingKey(testnetSpendingKey, 'testnet')
+  const testnetSpendingKey = zcash.generateSpendingKey('testnet')
+  const testnetAddress = zcash.generateAddressFromSpendingKey(testnetSpendingKey, 'testnet')
   t.equal(testnetAddress.slice(0, 2), 'zt')
   t.end()
 })
 
 test('generateWallet', function (t) {
-  const mainnetWallet = zaddr.generateWallet('mainnet')
+  const mainnetWallet = zcash.generateWallet('mainnet')
   t.equal(mainnetWallet.spendingKey.slice(0, 2), 'SK')
   t.equal(mainnetWallet.address.slice(0, 2), 'zc')
 
-  const testnetWallet = zaddr.generateWallet('testnet')
+  const testnetWallet = zcash.generateWallet('testnet')
   t.equal(testnetWallet.spendingKey.slice(0, 2), 'ST')
   t.equal(testnetWallet.address.slice(0, 2), 'zt')
   t.end()
@@ -67,13 +67,13 @@ test('generateWallet', function (t) {
 
 mainnetPairs.forEach(function (pair, index) {
   test('generateViewingKeyFromSpendingKey' + index, function (t) {
-    const viewingKey = zaddr.generateViewingKeyFromSpendingKey(pair.spendingKey, pair.network)
+    const viewingKey = zcash.generateViewingKeyFromSpendingKey(pair.spendingKey, pair.network)
     t.equal(viewingKey, pair.viewingKey)
     t.end()
   })
 
   test('generateAddressFromSpendingKey' + index, function (t) {
-    const address = zaddr.generateAddressFromSpendingKey(pair.spendingKey, pair.network)
+    const address = zcash.generateAddressFromSpendingKey(pair.spendingKey, pair.network)
     t.equal(address.slice(0, 2), 'zc')
     t.equal(address, pair.address)
     t.end()

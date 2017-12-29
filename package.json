@@ -1,7 +1,7 @@
 {
-  "name": "zaddr",
-  "version": "1.0.5",
-  "description": "A lightweight Javascript library for generating Zcash z-addresses",
+  "name": "zcash-wallet",
+  "version": "1.0.0",
+  "description": "A lightweight Javascript library for generating Zcash t-addresses and z-addresses",
   "main": "index.js",
   "scripts": {
     "test": "standard && tape test/*.js"
@@ -18,9 +18,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/howardwu/zaddr.git"
+    "url": "git://github.com/MyZcash/zcash-wallet.git"
   },
-  "homepage": "https://github.com/howardwu/zaddr",
+  "homepage": "https://github.com/MyZcash/zcash-wallet",
   "keywords": [
     "crypto",
     "private",
