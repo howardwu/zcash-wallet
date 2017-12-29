@@ -37,6 +37,40 @@ const mainnetZAddresses = [
   }
 ]
 
+mainnetTAddresses.forEach(function (pair, index) {
+  test('generateAddressFromWIF' + index, function (t) {
+    const address = zcash.generateAddressFromWIF(pair.key, pair.network)
+    t.equal(address, pair.address)
+    t.end()
+  })
+})
+
+mainnetZAddresses.forEach(function (pair, index) {
+  test('generateViewingKeyFromSpendingKey' + index, function (t) {
+    const viewingKey = zcash.generateViewingKeyFromSpendingKey(pair.spendingKey, pair.network)
+    t.equal(viewingKey, pair.viewingKey)
+    t.end()
+  })
+
+  test('generateAddressFromSpendingKey' + index, function (t) {
+    const address = zcash.generateAddressFromSpendingKey(pair.spendingKey, pair.network)
+    t.equal(address.slice(0, 2), 'zc')
+    t.equal(address, pair.address)
+    t.end()
+  })
+})
+
+test('generateAddressFromWIF', function (t) {
+  const mainnetWIF = zcash.generateWIF('mainnet')
+  const mainnetAddress = zcash.generateAddressFromWIF(mainnetWIF, 'mainnet')
+  t.equal(mainnetAddress.slice(0, 2), 't1')
+
+  const testnetWIF = zcash.generateWIF('testnet')
+  const testnetAddress = zcash.generateAddressFromWIF(testnetWIF, 'testnet')
+  t.equal(testnetAddress.slice(0, 2), 'tm')
+  t.end()
+})
+
 test('generateSpendingKey', function (t) {
   const mainnetSpendingKey = zcash.generateSpendingKey('mainnet')
   t.equal(mainnetSpendingKey.slice(0, 2), 'SK')
@@ -79,25 +113,17 @@ test('generateZAddress', function (t) {
   t.end()
 })
 
-mainnetTAddresses.forEach(function (pair, index) {
-  test('generateAddressFromWIF' + index, function (t) {
-    const address = zcash.generateAddressFromWIF(pair.key, pair.network)
-    t.equal(address, pair.address)
-    t.end()
-  })
-})
+test('generateTransparentTransaction', function (t) {
+  const wif = 'L3FFKs3hLRByoAkyHLaocvteYBxTmiWk9CFAMq8YmF6oj1UzfkmF'
+  const utxos = [{
+    'txId': '115e8f72f39fad874cfab0deed11a80f24f967a84079fb56ddf53ea02e308986',
+    'outputIndex': 0,
+    'address': 't1XubKVFVgcGUzE8j2gwNDY6hbt3G2ECty7',
+    'script': '76a91447862fe165e6121af80d5dde1ecb478ed170565b88ac',
+    'satoshis': 50000
+  }]
 
-mainnetZAddresses.forEach(function (pair, index) {
-  test('generateViewingKeyFromSpendingKey' + index, function (t) {
-    const viewingKey = zcash.generateViewingKeyFromSpendingKey(pair.spendingKey, pair.network)
-    t.equal(viewingKey, pair.viewingKey)
-    t.end()
-  })
-
-  test('generateAddressFromSpendingKey' + index, function (t) {
-    const address = zcash.generateAddressFromSpendingKey(pair.spendingKey, pair.network)
-    t.equal(address.slice(0, 2), 'zc')
-    t.equal(address, pair.address)
-    t.end()
-  })
+  const mainnetTransaction = zcash.generateTransparentTransaction(wif, utxos, 't1XubKVFVgcGUzE8j2gwNDY6hbt3G2ECty7', 15000, 'mainnet').toString()
+  console.log(mainnetTransaction)
+  t.end()
 })

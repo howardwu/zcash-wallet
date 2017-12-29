@@ -11,6 +11,11 @@ function generateAddressFromWIF (wif, network) {
   return twallet.convertWIFToAddress(wif, network).toString()
 }
 
+// Generates a transparent transaction.
+function generateTransparentTransaction (wif, utxos, receiver, amount, network) {
+  return twallet.createTransaction(wif, utxos, receiver, amount, network)
+}
+
 // Generates a random spending key.
 function generateSpendingKey (network) {
   return zwallet.createSpendingKey(network)
@@ -44,6 +49,7 @@ function generateZAddress (network) {
 module.exports = {
   generateWIF: generateWIF,
   generateAddressFromWIF: generateAddressFromWIF,
+  generateTransparentTransaction: generateTransparentTransaction,
   generateSpendingKey: generateSpendingKey,
   generateAddressFromSpendingKey: generateAddressFromSpendingKey,
   generateViewingKeyFromSpendingKey: generateViewingKeyFromSpendingKey,
