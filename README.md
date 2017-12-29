@@ -1,8 +1,5 @@
 # zcash-wallet
 
-[![TRAVIS](https://secure.travis-ci.org/howardwu/zaddr.png)](http://travis-ci.org/howardwu/zaddr)
-[![NPM](http://img.shields.io/npm/v/zaddr.svg)](https://www.npmjs.org/package/zaddr)
-
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 A lightweight Javascript library for generating Zcash t-addresses and z-addresses
