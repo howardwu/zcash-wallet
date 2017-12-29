@@ -2,7 +2,21 @@ const test = require('tape')
 const zcash = require('../index')
 
 // Generated using zcashd v1.0.14-RC1.
-const mainnetPairs = [
+const mainnetTAddresses = [
+  {
+    network: 'mainnet',
+    key: 'L3FFKs3hLRByoAkyHLaocvteYBxTmiWk9CFAMq8YmF6oj1UzfkmF',
+    address: 't1Qu2mQ1SGDvpQg1zXc5FXQK3kTwMtqVrab'
+  },
+  {
+    network: 'mainnet',
+    key: 'KyxWVXCJHyM2dbtqoxsumQe9NZ4LLCrUxwrxZ131XiYFeb2ZvoQR',
+    address: 't1XubKVFVgcGUzE8j2gwNDY6hbt3G2ECty7'
+  }
+]
+
+// Generated using zcashd v1.0.14-RC1.
+const mainnetZAddresses = [
   {
     network: 'mainnet',
     spendingKey: 'SKxss2BvgfLjKCmrWNdGdG3B9ZHhQf2L1kGsQB34uykWeYRHgaDN',
@@ -54,18 +68,26 @@ test('generateAddressFromSpendingKey', function (t) {
   t.end()
 })
 
-test('generateWallet', function (t) {
-  const mainnetWallet = zcash.generateWallet('mainnet')
+test('generateZAddress', function (t) {
+  const mainnetWallet = zcash.generateZAddress('mainnet')
   t.equal(mainnetWallet.spendingKey.slice(0, 2), 'SK')
   t.equal(mainnetWallet.address.slice(0, 2), 'zc')
 
-  const testnetWallet = zcash.generateWallet('testnet')
+  const testnetWallet = zcash.generateZAddress('testnet')
   t.equal(testnetWallet.spendingKey.slice(0, 2), 'ST')
   t.equal(testnetWallet.address.slice(0, 2), 'zt')
   t.end()
 })
 
-mainnetPairs.forEach(function (pair, index) {
+mainnetTAddresses.forEach(function (pair, index) {
+  test('generateAddressFromWIF' + index, function (t) {
+    const address = zcash.generateAddressFromWIF(pair.key, pair.network)
+    t.equal(address, pair.address)
+    t.end()
+  })
+})
+
+mainnetZAddresses.forEach(function (pair, index) {
   test('generateViewingKeyFromSpendingKey' + index, function (t) {
     const viewingKey = zcash.generateViewingKeyFromSpendingKey(pair.spendingKey, pair.network)
     t.equal(viewingKey, pair.viewingKey)

@@ -10,7 +10,8 @@
     "bs58check": "^2.0.2",
     "convert-hex": "^0.1.0",
     "convert-string": "^0.1.0",
-    "tweetnacl": "^0.14.5"
+    "tweetnacl": "^0.14.5",
+    "zcash-bitcore-lib": "^0.13.20-rc3"
   },
   "devDependencies": {
     "standard": "^10.0.2",
