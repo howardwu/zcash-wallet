@@ -1,21 +1,21 @@
 const test = require('tape')
 const zcash = require('../index')
 
-// Generated using zcashd v1.0.14-RC1.
 const mainnetTAddresses = [
   {
     network: 'mainnet',
-    key: 'L3FFKs3hLRByoAkyHLaocvteYBxTmiWk9CFAMq8YmF6oj1UzfkmF',
-    address: 't1Qu2mQ1SGDvpQg1zXc5FXQK3kTwMtqVrab'
+    key: 'L3a3yRcYATnZQt7ams14Pe5KCyRzrrCSejDyeQzHXGntToffVH4g',
+    publicKey: '0310d63f8c2f0a6efd13ce8a77776de26eba1816f73aa73e73a4da3f2368fcc949',
+    address: 't1JwBjJWgNQVqWxGha2RsPZMhVGgfRg2pod'
   },
   {
     network: 'mainnet',
-    key: 'KyxWVXCJHyM2dbtqoxsumQe9NZ4LLCrUxwrxZ131XiYFeb2ZvoQR',
-    address: 't1XubKVFVgcGUzE8j2gwNDY6hbt3G2ECty7'
+    key: 'Kx7f3xE2TmhczSkFUxxSajE2vuuLrrqinAbTZBxqxHj6XGbhoyrQ',
+    publicKey: '02f4bf56c9c8389b04752236a4f2419367e3a4e36fe80da6162a0b530ca91262b0',
+    address: 't1VnZLVwvaUsnYt34XJHNTu24wn3kD8RwsE'
   }
 ]
 
-// Generated using zcashd v1.0.14-RC1.
 const mainnetZAddresses = [
   {
     network: 'mainnet',

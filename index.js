@@ -2,8 +2,13 @@ const twallet = require('./src/t-wallet')
 const zwallet = require('./src/z-wallet')
 
 // Generates a random WIF key.
-function generateWIF (network) {
-  return twallet.createWIF(network)
+function generateWIF (network, compressed) {
+  return twallet.createWIF(network, compressed)
+}
+
+// Generates the public key associated with a given WIF key.
+function generatePublicKeyFromWIF (wif, network) {
+  return twallet.convertWIFToPublicKey(wif, network).toString()
 }
 
 // Generates the address associated with a given WIF key.
@@ -32,10 +37,11 @@ function generateViewingKeyFromSpendingKey (key, network) {
 }
 
 // Generates a Zcash t-address wallet.
-function generateTAddress (network) {
-  const wif = generateWIF(network)
+function generateTAddress (network, compressed) {
+  const wif = generateWIF(network, compressed)
+  const publicKey = generatePublicKeyFromWIF(wif, network)
   const address = generateAddressFromWIF(wif, network)
-  return { key: wif, address: address }
+  return { key: wif, publicKey: publicKey, address: address }
 }
 
 // Generates a Zcash z-address wallet.
@@ -48,6 +54,7 @@ function generateZAddress (network) {
 
 module.exports = {
   generateWIF: generateWIF,
+  generatePublicKeyFromWIF: generatePublicKeyFromWIF,
   generateAddressFromWIF: generateAddressFromWIF,
   generateTransparentTransaction: generateTransparentTransaction,
   generateSpendingKey: generateSpendingKey,

@@ -21,12 +21,31 @@ function validateWIF (wif) {
 }
 
 // Generates a new WIF.
-function createWIF (network) {
+function createWIF (network, compressed) {
   if (!validateNetwork(network)) {
     throw new Error('Invalid network choice')
   }
 
-  return new zcash.PrivateKey(null, network).toWIF()
+  var data = {
+    bn: zcash.PrivateKey._getRandomBN(),
+    compressed: typeof compressed !== 'boolean' ? true : compressed,
+    network
+  }
+
+  return new zcash.PrivateKey(data).toWIF()
+}
+
+// Converts a provided WIF string to a public key string.
+function convertWIFToPublicKey (wif, network) {
+  if (!validateNetwork(network)) {
+    throw new Error('Invalid network choice')
+  }
+
+  if (!validateWIF(wif)) {
+    throw new Error('Invalid WIF key')
+  }
+
+  return new zcash.PrivateKey(wif, network).toPublicKey()
 }
 
 // Converts a provided WIF string to an address string.
@@ -64,6 +83,7 @@ function createTransaction (wif, utxos, receiver, amount, network) {
 
 module.exports = {
   createWIF: createWIF,
+  convertWIFToPublicKey: convertWIFToPublicKey,
   convertWIFToAddress: convertWIFToAddress,
   createTransaction: createTransaction
 }

@@ -10,8 +10,9 @@ A lightweight Javascript library for generating Zcash t-addresses and z-addresse
 const zcash = require('./index')
 
 const taddress = zcash.generateTAddress('mainnet')
-// => { key     : 'L3FFKs3hLRByoAkyHLaocvteYBxTmiWk9CFAMq8YmF6oj1UzfkmF',
-//      address : 't1Qu2mQ1SGDvpQg1zXc5FXQK3kTwMtqVrab' }
+// => { key        : 'L3a3yRcYATnZQt7ams14Pe5KCyRzrrCSejDyeQzHXGntToffVH4g',
+//      publicKey  : '0310d63f8c2f0a6efd13ce8a77776de26eba1816f73aa73e73a4da3f2368fcc949',
+//      address    : 't1JwBjJWgNQVqWxGha2RsPZMhVGgfRg2pod' }
 
 const zaddress = zcash.generateZAddress('mainnet')
 // => { spendingKey : 'SKxss2BvgfLjKCmrWNdGdG3B9ZHhQf2L1kGsQB34uykWeYRHgaDN',
