@@ -19,9 +19,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/MyZcash/zcash-wallet.git"
+    "url": "git://github.com/howardwu/zcash-wallet.git"
   },
-  "homepage": "https://github.com/MyZcash/zcash-wallet",
+  "homepage": "https://github.com/howardwu/zcash-wallet",
   "keywords": [
     "crypto",
     "private",
